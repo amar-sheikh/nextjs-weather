@@ -1,103 +1,261 @@
+'use client'
+
+import { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
+import { Unit, TempUnit, FilterType, WeatherResponse } from "./lib/definitions";
+import { tempUnitMap } from "./lib/maps";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [data, setData] = useState<WeatherResponse | null>(null)
+  const [tempUnit, setTempUnit] = useState<TempUnit>('K')
+  const [error, setError] = useState('')
+  const [filter, setFilter] = useState<FilterType>({
+    lat: '0',
+    lon: '0',
+    unit: 'standard',
+    lang: 'en'
+  })
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    fetchResult()
+  })
+
+  const fetchResult = async () => {
+    setError('')
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${filter.lat}&lon=${filter.lon}&units=${filter.unit}&lang=${filter.lang}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
+      )
+
+      setData(await response.json())
+      setTempUnit(tempUnitMap[filter.unit])
+    }
+    catch {
+      setError('Error fetching data from api...!')
+    }
+  }
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    fetchResult()
+  }
+
+  return (
+    <div>
+      <h1 className="px-3 pb-4 text-3xl font-bold text-orange-400">Current Forcast</h1>
+      <form className="block" onSubmit={handleSubmit}>
+        <div className="grid grid-cols-5 gap-3">
+          <div className="flex gap-2 items-center">
+            <label htmlFor="lat">Latitute: </label>
+            <input
+              type="number"
+              name="lat"
+              max={90}
+              min={-90}
+              value={filter.lat}
+              step={0.01}
+              onChange={(e) => setFilter({ ...filter, lat: e.target.value })}
+              className="py-1.5 pr-3 pl-1 grow rounded-sm border-orange-400 border-1 text-base text-black placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+              placeholder="Enter lat" />
+          </div>
+          <div className="flex gap-2 items-center">
+            <label htmlFor="lon">Longitude: </label>
+            <input
+              type="number"
+              name="lon"
+              max={180}
+              min={-180}
+              value={filter.lon}
+              step={0.01}
+              onChange={(e) => setFilter({ ...filter, lon: e.target.value })}
+              className="py-1.5 pr-3 pl-1 grow rounded-sm border-orange-400 border-1 text-base text-black placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+              placeholder="Enter lon" />
+          </div>
+          <div className="flex gap-2 items-center">
+            <label htmlFor="unit">Unit: </label>
+            <select
+              name="unit"
+              value={filter.unit}
+              onChange={(e) => setFilter({ ...filter, unit: e.target.value as Unit })}
+              className="py-1.5 pr-3 pl-1 grow rounded-sm border-orange-400 border-1 text-base text-black placeholder:text-gray-400 focus:outline-none sm:text-sm/6">
+              <option value="standard" className="hover:bg-orange-300">standard</option>
+              <option value="metric" className="hover:bg-orange-300">Metric</option>
+              <option value="imperial" className="hover:bg-orange-300">Imperial</option>
+            </select>
+          </div>
+          <div className="flex gap-2 items-center">
+            <label htmlFor="unit">Language: </label>
+            <select
+              name="lang"
+              value={filter.lang}
+              onChange={(e) => setFilter({ ...filter, lang: e.target.value })}
+              className="py-1.5 pr-3 pl-1 grow rounded-sm border-orange-400 border-1 text-base text-black placeholder:text-gray-400 focus:outline-none sm:text-sm/6">
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+              <option value="it">Italian</option>
+              <option value="pt">Portuguese</option>
+              <option value="ru">Russian</option>
+              <option value="ja">Japanese</option>
+              <option value="zh">Chinese</option>
+              <option value="ar">Arabic</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            className="px-4 py-2 rounded-md bg-orange-300 text-white hover:bg-orange-500 focus:outline-none transition">
+            Filter results
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </form>
+
+      {
+        error && <div className="p-3 bg-red-500 text-white">{error}</div>
+      }
+      <div className="my-3">
+        {
+          data && (
+            <>
+              <h3 className="p-1 text-center text-2xl text-white rounded-md bg-orange-400">Weather Report</h3>
+              <div className="p-4 text-center text-orange-700 text-base">
+                Following is the weather report for latitute <strong>&deg;{filter.lat}</strong> and longitude <strong>&deg;{filter.lon}</strong> at <strong>{new Date(data.dt * 1000).toUTCString()}</strong>.
+              </div>
+
+              <div className="grid grid-cols-3 gap-3">
+                <div className="rounded-xl bg-white p-4 shadow-lg shadow-orange-300 space-y-3">
+                  <div className="flex items-center justify-between border-b-2 border-orange-400 pb-2">
+                    <h3 className="text-xl font-semibold text-gray-800">Weather</h3>
+                  </div>
+                  <div className="space-y-2 text-gray-700">
+                    <div className="font-medium"><strong>{data.weather[0].main}</strong> - {data.weather[0].description}</div>
+                    <div>
+                      {
+                        data.weather[0].icon && <Image
+                          width={120}
+                          height={120}
+                          src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+                          alt='image' />
+                      }
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-xl bg-white p-4 shadow-lg shadow-orange-300 space-y-3">
+                  <div className="flex items-center justify-between border-b-2 border-orange-400 pb-2">
+                    <h3 className="text-xl font-semibold text-gray-800">Wind</h3>
+                  </div>
+                  <div className="space-y-2 text-gray-700">
+                    <div>
+                      <span className="font-medium">Speed:</span> <strong>{data.wind.speed} m/s</strong>
+                    </div>
+                    <div>
+                      <span className="font-medium">Direction:</span> <strong>{data.wind.deg}°</strong>
+                    </div>
+                    {
+                      data.wind.gust && (
+                        <div>
+                          <span className="font-medium">Gust:</span> <strong>{data.wind.gust} m/s</strong>
+                        </div>
+                      )
+                    }
+                  </div>
+                </div>
+
+                <div className="rounded-xl bg-white p-4 shadow-lg shadow-orange-300 space-y-3">
+                  <div className="flex items-center justify-between border-b-2 border-orange-400 pb-2">
+                    <h3 className="text-xl font-semibold text-gray-800">Cloud</h3>
+                  </div>
+                  <div className="space-y-2 text-gray-700">
+                    <div>
+                      <span className="font-medium">The cloud covers the <strong>{data.clouds.all}% of sky</strong>.</span>
+                    </div>
+                    <div>
+                      <span className="font-medium">
+                        {data.clouds.all > 50 ? 'The sky is mostly cloudy today.' : 'The sky is relatively clear today.'}
+                      </span>
+                    </div>
+                    <div>
+                      {
+                        data.rain && data.rain['1h'] && <span className="font-medium">
+                          Also the rain of {data.rain['1h']} mm falls within last hour.
+                        </span>
+                      }
+                      {
+                        data.snow && data.snow['1h'] && <span className="font-medium">
+                          Also the snow of {data.snow['1h']} mm falls within last hour.
+                        </span>
+                      }
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-xl bg-white p-4 shadow-lg shadow-orange-300 space-y-4">
+                  <div className="flex items-center justify-between border-b-2 border-orange-400 pb-2">
+                    <h3 className="text-xl font-semibold text-gray-800">Location Details</h3>
+                  </div>
+                  <div className="space-y-2 text-gray-700">
+                    {
+                      data.name && <div>
+                        <span className="font-medium">City:</span> <strong>{data.name}</strong>
+                      </div>
+                    }
+                    {
+                      data.sys.country && <div>
+                        <span className="font-medium">Country:</span> <strong>{data.sys.country}</strong>
+                      </div>
+                    }
+                    <div>
+                      <span className="font-medium">Sunrise:</span> <strong>{new Date(data.sys.sunrise * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</strong>{' '}
+                    </div>
+                    <div>
+                      <span className="font-medium">Sunset:</span> <strong>{new Date(data.sys.sunset * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</strong>
+                    </div>
+                    <div>
+                      <span className="font-medium">UTC Offset:</span> <strong>
+                        {parseInt(data.timezone) > 0 && '+'}{Math.floor(parseInt(data.timezone) / 3600)}
+                      </strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-xl bg-white p-4 shadow-lg shadow-orange-300 space-y-4">
+                  <div className="flex items-center justify-between border-b-2 border-orange-400 pb-2">
+                    <h3 className="text-xl font-semibold text-gray-800">Temperature</h3>
+                  </div>
+                  <div className="space-y-2 text-gray-700">
+                    <div>
+                      <span className="font-medium">Average Temp:</span> <strong> {data.main.temp}&deg;{tempUnit}</strong>
+                    </div>
+                    <div>
+                      <span className="font-medium">Feels Like:</span> <strong> {data.main.feels_like}&deg;{tempUnit}</strong>
+                    </div>
+                    <div>
+                      <span className="font-medium">Minimum Temp:</span> <strong> {data.main.temp_min}&deg;{tempUnit}</strong>
+                    </div>
+                    <div>
+                      <span className="font-medium">Maximum Temp:</span> <strong> {data.main.temp_max}&deg;{tempUnit}</strong>
+                    </div>
+                    <div>
+                      <span className="font-medium">Humidity:</span> <strong> {data.main.humidity}%</strong>
+                    </div>
+                    {
+                      data.main.sea_level && <div>
+                        <span className="font-medium">Pressure at Sea Level:</span> <strong>{data.main.sea_level} hPa</strong>{' '}
+                      </div>
+                    }
+                    {
+                      data.main.grnd_level && <div>
+                        <span className="font-medium">Pressure at Ground Level:</span> <strong>{data.main.grnd_level} hPa</strong>{' '}
+                      </div>
+                    }
+                  </div>
+                </div>
+              </div>
+            </>
+          )
+        }
+      </div>
     </div>
   );
 }
