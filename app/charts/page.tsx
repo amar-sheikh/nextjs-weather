@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, FormEvent } from 'react'
 import {
-  AreaChart, Area, CartesianGrid, Tooltip, XAxis, YAxis, ResponsiveContainer
+  LineChart, BarChart, Bar, Line, Legend, CartesianGrid, Tooltip, XAxis, YAxis, ResponsiveContainer
 } from 'recharts'
 import { FourDaysFilterType, FourDaysWeatherResponse } from '../lib/definitions'
 
@@ -20,7 +20,7 @@ const FourDaysPage = () => {
 
   useEffect(() => {
     fetchResult()
-  })
+  }, [])
 
   const temperatureChartData = data?.list.map(item => ({
     datetime: item.dt_txt ?? '',
@@ -29,13 +29,14 @@ const FourDaysPage = () => {
 
   const humidityChartData = data?.list.map(item => ({
     datetime: item.dt_txt ?? '',
-    value: `${item.main.humidity}%`
+    value: item.main.humidity
   })) ?? []
 
   const pressureChartData = data?.list.map(item => ({
     datetime: item.dt_txt ?? '',
-    sea_level: `${item.main.sea_level} hPa`,
-    ground_level: `${item.main.grnd_level} hPa`
+    sea_level: item.main.sea_level ?? 0,
+    ground_level: item.main.grnd_level ?? 0,
+    avg: Math.floor(((item.main.sea_level ?? 0) + (item.main.grnd_level ?? 0)) / 2)
   })) ?? []
 
   const fetchResult = async () => {
@@ -141,13 +142,14 @@ const FourDaysPage = () => {
             </div>
             <div className="text-gray-700">
               <ResponsiveContainer width="100%" height={250}>
-                <AreaChart data={temperatureChartData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                  <XAxis dataKey="datetime" />
-                  <YAxis />
+                <BarChart width={730} height={250} data={temperatureChartData}>
                   <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
                   <Tooltip />
-                  <Area type="monotone" dataKey="temperature" stroke="#8884d8" fill="orange" />
-                </AreaChart>
+                  <Legend />
+                  <Bar dataKey="temperature" fill="#82ca9d" />
+                </BarChart>
               </ResponsiveContainer>
             </div>
           </div>
@@ -158,13 +160,14 @@ const FourDaysPage = () => {
             </div>
             <div className="text-gray-700">
               <ResponsiveContainer width="100%" height={250}>
-                <AreaChart data={humidityChartData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                  <XAxis dataKey="datetime" />
-                  <YAxis />
+                <BarChart width={730} height={250} data={humidityChartData}>
                   <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
                   <Tooltip />
-                  <Area type="monotone" dataKey="value" stroke="#8884d8" fill="orange" />
-                </AreaChart>
+                  <Legend />
+                  <Bar dataKey="value" fill="#FFC0CB" />
+                </BarChart>
               </ResponsiveContainer>
             </div>
           </div>
@@ -175,24 +178,15 @@ const FourDaysPage = () => {
             </div>
             <div className="text-gray-700">
               <ResponsiveContainer width="100%" height={250}>
-                <AreaChart data={pressureChartData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                  <defs>
-                    <linearGradient id="colorSea" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                      <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                    </linearGradient>
-                    <linearGradient id="colorGround" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-                      <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
+                <LineChart data={pressureChartData} width={730} height={250} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                  <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="datetime" />
                   <YAxis />
-                  <CartesianGrid strokeDasharray="3 3" />
                   <Tooltip />
-                  <Area type="monotone" dataKey="sea_level" stroke="#8884d8" fillOpacity={1} fill="url(#colorSea)" />
-                  <Area type="monotone" dataKey="ground_level" stroke="#82ca9d" fillOpacity={1} fill="url(#colorGround)" />
-                </AreaChart>
+                  <Legend />
+                  <Line type="monotone" dataKey="sea_level" stroke="#8884d8" />
+                  <Line type="monotone" dataKey="ground_level" stroke="#82ca9d" />
+                </LineChart>
               </ResponsiveContainer>
             </div>
           </div>
