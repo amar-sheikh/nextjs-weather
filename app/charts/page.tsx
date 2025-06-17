@@ -4,10 +4,10 @@ import React, { useState, useEffect, FormEvent } from 'react'
 import {
   LineChart, BarChart, Bar, Line, Legend, CartesianGrid, Tooltip, XAxis, YAxis, ResponsiveContainer
 } from 'recharts'
-import { FourDaysFilterType, FourDaysWeatherResponse } from '../lib/definitions'
+import { ChartsFilterType, ChartWeatherResponse } from '../lib/definitions'
 
-const FourDaysPage = () => {
-  const [filter, setFilter] = useState<FourDaysFilterType>({
+const ChartPage = () => {
+  const [filter, setFilter] = useState<ChartsFilterType>({
     city: 'London',
     stateCode: '',
     country: '',
@@ -15,7 +15,7 @@ const FourDaysPage = () => {
     lang: 'en',
   })
 
-  const [data, setData] = useState<FourDaysWeatherResponse | null>(null)
+  const [data, setData] = useState<ChartWeatherResponse | null>(null)
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -45,7 +45,6 @@ const FourDaysPage = () => {
       const response = await fetch(
         `https://pro.openweathermap.org/data/2.5/forecast?q=${[filter.city, filter.stateCode, filter.country].filter(Boolean).join(',')}&cnt=${filter.cnt}&lang=${filter.lang}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
       )
-      if (!response.ok) throw new Error('API request failed')
 
       const jsonData = await response.json()
       setData(jsonData)
@@ -66,38 +65,45 @@ const FourDaysPage = () => {
       <form className="block" onSubmit={handleSubmit}>
         <div className="grid grid-cols-3 gap-3">
           <div className="flex gap-2 items-center">
-            <label htmlFor="city">City: </label>
+            <label htmlFor="city">City:</label>{' '}
             <input
               type="text"
               name="city"
+              id='city'
+              value={filter.city}
               onChange={(e) => setFilter({ ...filter, city: e.target.value })}
               className="py-1.5 pr-3 pl-1 grow rounded-sm border-orange-400 border-1 text-base text-black placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
               required
               placeholder="Enter city name" />
           </div>
           <div className="flex gap-2 items-center">
-            <label htmlFor="country">Country: </label>
+            <label htmlFor="country">Country:</label>{' '}
             <input
               type="text"
               name="country"
+              id='country'
+              value={filter.country}
               onChange={(e) => setFilter({ ...filter, country: e.target.value })}
               className="py-1.5 pr-3 pl-1 grow rounded-sm border-orange-400 border-1 text-base text-black placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
               placeholder="Enter country name(optional)" />
           </div>
           <div className="flex gap-2 items-center">
-            <label htmlFor="stateCode">State Code: </label>
+            <label htmlFor="stateCode">State Code:</label>{' '}
             <input
               type="text"
               name="stateCode"
+              id='stateCode'
+              value={filter.stateCode}
               onChange={(e) => setFilter({ ...filter, stateCode: e.target.value })}
               className="py-1.5 pr-3 pl-1 grow rounded-sm border-orange-400 border-1 text-base text-black placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
               placeholder="Enter state code(optional)" />
           </div>
           <div className="flex gap-2 items-center">
-            <label htmlFor="cnt">Count: </label>
+            <label htmlFor="cnt">Count:</label>{' '}
             <input
               type="number"
               name="cnt"
+              id='cnt'
               max={96}
               min={10}
               value={filter.cnt}
@@ -106,9 +112,10 @@ const FourDaysPage = () => {
               placeholder="Enter cnt" />
           </div>
           <div className="flex gap-2 items-center">
-            <label htmlFor="unit">Language: </label>
+            <label htmlFor="unit">Language:</label>{' '}
             <select
               name="lang"
+              id='lang'
               value={filter.lang}
               onChange={(e) => setFilter({ ...filter, lang: e.target.value })}
               className="py-1.5 pr-3 pl-1 grow rounded-sm border-orange-400 border-1 text-base text-black placeholder:text-gray-400 focus:outline-none sm:text-sm/6">
@@ -196,4 +203,4 @@ const FourDaysPage = () => {
   )
 }
 
-export default FourDaysPage
+export default ChartPage

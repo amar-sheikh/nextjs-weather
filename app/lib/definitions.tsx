@@ -9,10 +9,10 @@ export type FilterType = {
     lang: string
 }
 
-export type FourDaysFilterType = {
-    city:string,
-    country:string
-    stateCode:string
+export type ChartsFilterType = {
+    city: string,
+    country: string
+    stateCode: string
     cnt: string
     lang: string
 }
@@ -75,7 +75,7 @@ export type WeatherResponse = {
     dt_txt?: string
 };
 
-export type FourDaysWeatherResponse = {
+export type ChartWeatherResponse = {
     cod: string
     message: number
     cnt: number
