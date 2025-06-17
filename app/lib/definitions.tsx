@@ -3,18 +3,15 @@ export type Unit = 'standard' | 'metric' | 'imperial'
 export type TempUnit = 'K' | 'C' | 'F'
 
 export type FilterType = {
-    lat: string
-    lon: string
+    city: string,
+    stateCode: string
+    country: string
     unit: Unit
     lang: string
 }
 
-export type ChartsFilterType = {
-    city: string,
-    country: string
-    stateCode: string
+export type ChartsFilterType = FilterType & {
     cnt: string
-    lang: string
 }
 
 export type WeatherResponse = {

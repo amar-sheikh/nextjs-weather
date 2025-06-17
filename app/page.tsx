@@ -10,8 +10,9 @@ export default function Home() {
   const [tempUnit, setTempUnit] = useState<TempUnit>('K')
   const [error, setError] = useState('')
   const [filter, setFilter] = useState<FilterType>({
-    lat: '0',
-    lon: '0',
+    city: 'London',
+    stateCode: '',
+    country: '',
     unit: 'standard',
     lang: 'en'
   })
@@ -23,8 +24,14 @@ export default function Home() {
   const fetchResult = async () => {
     setError('')
     try {
+      const geo_response = await fetch(
+        `http://api.openweathermap.org/geo/1.0/direct?q=${[filter.city, filter.stateCode, filter.country].filter(Boolean).join(',')}&limit=1&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
+      )
+
+      const geo_data = await geo_response.json()
+
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${filter.lat}&lon=${filter.lon}&units=${filter.unit}&lang=${filter.lang}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${geo_data[0].lat}&lon=${geo_data[0].lon}&units=${filter.unit}&lang=${filter.lang}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
       )
 
       setData(await response.json())
@@ -44,34 +51,40 @@ export default function Home() {
     <div>
       <h1 className="px-3 pb-4 text-3xl font-bold text-orange-400">Current Forcast</h1>
       <form className="block" onSubmit={handleSubmit}>
-        <div className="grid grid-cols-5 gap-3">
+        <div className="grid grid-cols-3 gap-3">
           <div className="flex gap-2 items-center">
-            <label htmlFor="lat">Latitute:</label>{' '}
+            <label htmlFor="city">City:</label>{' '}
             <input
-              type="number"
-              name="lat"
-              id="lat"
-              max={90}
-              min={-90}
-              value={filter.lat}
-              step={0.01}
-              onChange={(e) => setFilter({ ...filter, lat: e.target.value })}
+              type="text"
+              name="city"
+              id='city'
+              value={filter.city}
+              onChange={(e) => setFilter({ ...filter, city: e.target.value })}
               className="py-1.5 pr-3 pl-1 grow rounded-sm border-orange-400 border-1 text-base text-black placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
-              placeholder="Enter lat" />
+              required
+              placeholder="Enter city name" />
           </div>
           <div className="flex gap-2 items-center">
-            <label htmlFor="lon">Longitude:</label>{' '}
+            <label htmlFor="country">Country:</label>{' '}
             <input
-              type="number"
-              name="lon"
-              id="lon"
-              max={180}
-              min={-180}
-              value={filter.lon}
-              step={0.01}
-              onChange={(e) => setFilter({ ...filter, lon: e.target.value })}
+              type="text"
+              name="country"
+              id='country'
+              value={filter.country}
+              onChange={(e) => setFilter({ ...filter, country: e.target.value })}
               className="py-1.5 pr-3 pl-1 grow rounded-sm border-orange-400 border-1 text-base text-black placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
-              placeholder="Enter lon" />
+              placeholder="Enter country name(optional)" />
+          </div>
+          <div className="flex gap-2 items-center">
+            <label htmlFor="stateCode">State Code:</label>{' '}
+            <input
+              type="text"
+              name="stateCode"
+              id='stateCode'
+              value={filter.stateCode}
+              onChange={(e) => setFilter({ ...filter, stateCode: e.target.value })}
+              className="py-1.5 pr-3 pl-1 grow rounded-sm border-orange-400 border-1 text-base text-black placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+              placeholder="Enter state code(optional)" />
           </div>
           <div className="flex gap-2 items-center">
             <label htmlFor="unit">Unit:</label>{' '}
@@ -122,7 +135,7 @@ export default function Home() {
             <>
               <h3 className="p-1 text-center text-2xl text-white rounded-md bg-orange-400" id='weather-report-heading'>Weather Report</h3>
               <div className="p-4 text-center text-orange-700 text-base" id='weather-report-subheading'>
-                Following is the weather report for latitute <strong>&deg;{filter.lat}</strong> and longitude <strong>&deg;{filter.lon}</strong> at <strong>{new Date(data.dt * 1000).toUTCString()}</strong>.
+                Following is the weather report for <strong>{data.name}</strong> at <strong>{new Date(data.dt * 1000).toUTCString()}</strong>.
               </div>
 
               <div className="grid grid-cols-3 gap-3">
