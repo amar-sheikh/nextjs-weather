@@ -2,7 +2,8 @@ import '@testing-library/jest-dom'
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import Page from '../app/page'
 
-const lat_0_lon_0_data = {
+const london_location = [{lat: 51.5073219,lon: -0.1276474}]
+const london_data = {
     weather: [{ main: 'Clouds', description: 'scattered clouds', icon: '03d' }],
     wind: { speed: 5.7, deg: 200 },
     clouds: { all: 40 },
@@ -14,12 +15,13 @@ const lat_0_lon_0_data = {
         humidity: 65,
     },
     dt: 1687012800,
-    name: 'Test City',
-    sys: { country: 'Test Country', sunrise: 1686964800, sunset: 1687005000 },
+    name: 'London',
+    sys: { country: 'GB', sunrise: 1686964800, sunset: 1687005000 },
     timezone: 10800,
 }
 
-const lat_20_lon_negative_45_data = {
+const moscow_location = [{lat: 55.7504461,lon: 37.6174943}]
+const moscow_data = {
     weather: [{ main: 'Clouds', description: 'scattered clouds', icon: '13d' }],
     wind: { speed: 6.83, deg: 72, gust: 7.71 },
     clouds: { all: 100 },
@@ -33,20 +35,32 @@ const lat_20_lon_negative_45_data = {
         grnd_level: 1020
     },
     dt: 1750078187,
-    sys: { sunrise: 1750080000, sunset: 1750041600 },
+    name: 'Moscow',
+    sys: { country: 'RU', sunrise: 1750080000, sunset: 1750041600 },
     timezone: -18000,
 }
 
 beforeEach(() => {
     global.fetch = jest.fn((url) => {
-        if (url.includes('lat=0') && url.includes('lon=0')) {
+        if (url.includes('q=London')) {
             return Promise.resolve({
-                json: () => Promise.resolve(lat_0_lon_0_data),
+                json: () => Promise.resolve(london_location),
             });
         }
-        if (url.includes('lat=20') && url.includes('lon=-45') && url.includes('units=metric')) {
+        if (url.includes('lat=51.5073219') && url.includes('lon=-0.1276474')) {
             return Promise.resolve({
-                json: () => Promise.resolve(lat_20_lon_negative_45_data),
+                json: () => Promise.resolve(london_data),
+            });
+        }
+
+        if (url.includes('q=Moscow')) {
+            return Promise.resolve({
+                json: () => Promise.resolve(moscow_location),
+            });
+        }
+        if (url.includes('lat=55.7504461') && url.includes('lon=37.6174943') && url.includes('units=metric')) {
+            return Promise.resolve({
+                json: () => Promise.resolve(moscow_data),
             });
         }
 
@@ -62,7 +76,7 @@ afterEach(() => {
 
 
 describe('Page', () => {
-    it('renders with lat 0 and lon 0', async () => {
+    it('renders with london data', async () => {
         const { container } = render(<Page />)
 
         const h1 = screen.getByRole('heading', { level: 1 })
@@ -75,7 +89,7 @@ describe('Page', () => {
         expect(
             container.querySelector('#weather-report-subheading')?.textContent
         ).toBe(
-            `Following is the weather report for latitute °0 and longitude °0 at Sat, 17 Jun 2023 14:40:00 GMT.`
+            `Following is the weather report for London at Sat, 17 Jun 2023 14:40:00 GMT.`
         )
 
         expect(container.querySelector('#weather-name')?.textContent).toBe(`Clouds - scattered clouds`)
@@ -88,8 +102,8 @@ describe('Page', () => {
             'The cloud covers the 40% of sky.The sky is relatively clear today.'
         )
 
-        expect(container.querySelector('#location-city')?.textContent).toBe('City: Test City')
-        expect(container.querySelector('#location-country')?.textContent).toBe('Country: Test Country')
+        expect(container.querySelector('#location-city')?.textContent).toBe('City: London')
+        expect(container.querySelector('#location-country')?.textContent).toBe('Country: GB')
         expect(container.querySelector('#location-sunrise')?.textContent).toBe('Sunrise: 06:20 AM')
         expect(container.querySelector('#location-sunset')?.textContent).toBe('Sunset: 05:30 PM')
         expect(container.querySelector('#location-offset')?.textContent).toBe('UTC Offset: +3')
@@ -101,18 +115,15 @@ describe('Page', () => {
         expect(container.querySelector('#temperature-humidity')?.textContent).toBe('Humidity: 65%')
     })
 
-    it('renders with lat 20, lon -45 and unit metric', async () => {
+    it('renders with moscow data and unit metric', async () => {
         const { container } = render(<Page />)
 
         const h1 = screen.getByRole('heading', { level: 1 })
         expect(h1).toBeInTheDocument()
         expect(h1.textContent).toBe('Current Forcast');
 
-        const lat_input = screen.getByLabelText('Latitute:');
-        fireEvent.change(lat_input, { target: { value: '20' } });
-
-        const lon_input = screen.getByLabelText('Longitude:');
-        fireEvent.change(lon_input, { target: { value: '-45' } });
+        const city_input = screen.getByLabelText('City:');
+        fireEvent.change(city_input, { target: { value: 'Moscow' } });
 
         const unit_input = screen.getByLabelText('Unit:');
         fireEvent.change(unit_input, { target: { value: 'metric' } });
@@ -124,7 +135,7 @@ describe('Page', () => {
             expect(
                 container.querySelector('#weather-report-subheading')?.textContent
             ).toBe(
-                `Following is the weather report for latitute °20 and longitude °-45 at Mon, 16 Jun 2025 12:49:47 GMT.`
+                `Following is the weather report for Moscow at Mon, 16 Jun 2025 12:49:47 GMT.`
             )
         })
 
@@ -139,6 +150,8 @@ describe('Page', () => {
             'The cloud covers the 100% of sky.The sky is mostly cloudy today.'
         )
 
+        expect(container.querySelector('#location-city')?.textContent).toBe('City: Moscow')
+        expect(container.querySelector('#location-country')?.textContent).toBe('Country: RU')
         expect(container.querySelector('#location-sunrise')?.textContent).toBe('Sunrise: 06:20 PM')
         expect(container.querySelector('#location-sunset')?.textContent).toBe('Sunset: 07:40 AM')
         expect(container.querySelector('#location-offset')?.textContent).toBe('UTC Offset: -5')

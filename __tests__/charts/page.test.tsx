@@ -402,92 +402,17 @@ const moscow_data = {
     cnt: 12,
     list: [
         {
-            dt: 1750150800,
-            main: {
-                temp: 297.48,
-                feels_like: 297.38,
-                temp_min: 297.48,
-                temp_max: 297.48,
-                pressure: 1008,
-                sea_level: 1008,
-                grnd_level: 989,
-                humidity: 54,
-                temp_kf: 0
-            },
-            weather: [
-                {
-                    id: 802,
-                    main: "Clouds",
-                    description: "scattered clouds",
-                    icon: "03d"
-                }
-            ],
-            clouds: {
-                all: 37
-            },
-            wind: {
-                speed: 2.2,
-                deg: 134,
-                gust: 1.52
-            },
-            visibility: 10000,
-            pop: 0,
-            sys: {
-                pod: "d"
-            },
-            dt_txt: "2025-06-17 09:00:00"
-        },
-        {
-            dt: 1750161600,
-            main: {
-                temp: 297.04,
-                feels_like: 296.87,
-                temp_min: 296.16,
-                temp_max: 297.04,
-                pressure: 1007,
-                sea_level: 1007,
-                grnd_level: 987,
-                humidity: 53,
-                temp_kf: 0.88
-            },
-            weather: [
-                {
-                    id: 500,
-                    main: "Rain",
-                    description: "light rain",
-                    icon: "10d"
-                }
-            ],
-            clouds: {
-                all: 47
-            },
-            wind: {
-                speed: 3.3,
-                deg: 144,
-                gust: 2.43
-            },
-            visibility: 10000,
-            pop: 0.2,
-            "rain": {
-                "3h": 0.16
-            },
-            sys: {
-                pod: "d"
-            },
-            dt_txt: "2025-06-17 12:00:00"
-        },
-        {
             dt: 1750172400,
             main: {
-                temp: 295.28,
-                feels_like: 295.27,
-                temp_min: 294.18,
-                temp_max: 295.28,
+                temp: 70.41,
+                feels_like: 70.39,
+                temp_min: 69.49,
+                temp_max: 70.41,
                 pressure: 1006,
                 sea_level: 1006,
                 grnd_level: 987,
-                humidity: 66,
-                temp_kf: 1.1
+                humidity: 69,
+                temp_kf: 0.51
             },
             weather: [
                 {
@@ -498,17 +423,17 @@ const moscow_data = {
                 }
             ],
             clouds: {
-                all: 79
+                all: 77
             },
             wind: {
-                speed: 1.99,
-                deg: 204,
-                gust: 4.09
+                speed: 4.99,
+                deg: 177,
+                gust: 11.56
             },
             visibility: 10000,
-            pop: 0.96,
-            "rain": {
-                "3h": 1.25
+            pop: 1,
+            rain: {
+                "3h": 1.67
             },
             sys: {
                 pod: "d"
@@ -518,15 +443,15 @@ const moscow_data = {
         {
             dt: 1750183200,
             main: {
-                temp: 293.14,
-                feels_like: 293.47,
-                temp_min: 293.14,
-                temp_max: 293.14,
+                temp: 68.02,
+                feels_like: 68.47,
+                temp_min: 66.6,
+                temp_max: 68.02,
                 pressure: 1005,
                 sea_level: 1005,
                 grnd_level: 987,
-                humidity: 87,
-                temp_kf: 0
+                humidity: 84,
+                temp_kf: 0.79
             },
             weather: [
                 {
@@ -537,17 +462,17 @@ const moscow_data = {
                 }
             ],
             clouds: {
-                all: 100
+                all: 89
             },
             wind: {
-                speed: 1.26,
-                deg: 315,
-                gust: 1.47
+                speed: 5.03,
+                deg: 273,
+                gust: 7.61
             },
             visibility: 10000,
             pop: 1,
-            "rain": {
-                "3h": 1.93
+            rain: {
+                "3h": 1.65
             },
             sys: {
                 pod: "d"
@@ -557,21 +482,21 @@ const moscow_data = {
         {
             dt: 1750194000,
             main: {
-                temp: 291.86,
-                feels_like: 292.16,
-                temp_min: 291.86,
-                temp_max: 291.86,
-                pressure: 1004,
-                sea_level: 1004,
+                temp: 64.87,
+                feels_like: 65.52,
+                temp_min: 64.87,
+                temp_max: 64.87,
+                pressure: 1005,
+                sea_level: 1005,
                 grnd_level: 986,
-                humidity: 91,
+                humidity: 95,
                 temp_kf: 0
             },
             weather: [
                 {
-                    id: 500,
+                    id: 501,
                     main: "Rain",
-                    description: "light rain",
+                    description: "moderate rain",
                     icon: "10n"
                 }
             ],
@@ -579,14 +504,14 @@ const moscow_data = {
                 all: 100
             },
             wind: {
-                speed: 1.69,
-                deg: 352,
-                gust: 2.85
+                speed: 4.29,
+                deg: 316,
+                gust: 6.02
             },
             visibility: 10000,
             pop: 1,
-            "rain": {
-                "3h": 0.66
+            rain: {
+                "3h": 4.2
             },
             sys: {
                 pod: "n"
@@ -596,21 +521,21 @@ const moscow_data = {
         {
             dt: 1750204800,
             main: {
-                temp: 290.77,
-                feels_like: 290.91,
-                temp_min: 290.77,
-                temp_max: 290.77,
+                temp: 62.35,
+                feels_like: 62.83,
+                temp_min: 62.35,
+                temp_max: 62.35,
                 pressure: 1004,
                 sea_level: 1004,
-                grnd_level: 985,
-                humidity: 89,
+                grnd_level: 986,
+                humidity: 97,
                 temp_kf: 0
             },
             weather: [
                 {
-                    id: 500,
+                    id: 501,
                     main: "Rain",
-                    description: "light rain",
+                    description: "moderate rain",
                     icon: "10n"
                 }
             ],
@@ -618,14 +543,14 @@ const moscow_data = {
                 all: 100
             },
             wind: {
-                speed: 1.32,
-                deg: 332,
-                gust: 1.71
+                speed: 3.69,
+                deg: 317,
+                gust: 6.73
             },
             visibility: 10000,
-            pop: 0.81,
-            "rain": {
-                "3h": 0.7
+            pop: 1,
+            rain: {
+                "3h": 3.1
             },
             sys: {
                 pod: "n"
@@ -635,14 +560,14 @@ const moscow_data = {
         {
             dt: 1750215600,
             main: {
-                temp: 286.86,
-                feels_like: 286.69,
-                temp_min: 286.86,
-                temp_max: 286.86,
+                temp: 74.03,
+                feels_like: 75.56,
+                temp_min: 74.03,
+                temp_max: 74.03,
                 pressure: 1004,
                 sea_level: 1004,
-                grnd_level: 985,
-                humidity: 92,
+                grnd_level: 986,
+                humidity: 94,
                 temp_kf: 0
             },
             weather: [
@@ -657,14 +582,14 @@ const moscow_data = {
                 all: 100
             },
             wind: {
-                speed: 2.14,
-                deg: 348,
-                gust: 3.77
+                speed: 3.58,
+                deg: 339,
+                gust: 5.99
             },
             visibility: 10000,
-            pop: 0.97,
-            "rain": {
-                "3h": 1.91
+            pop: 0.74,
+            rain: {
+                "3h": 0.33
             },
             sys: {
                 pod: "d"
@@ -674,14 +599,14 @@ const moscow_data = {
         {
             dt: 1750226400,
             main: {
-                temp: 286.65,
-                feels_like: 286.46,
-                temp_min: 286.65,
-                temp_max: 286.65,
+                temp: 64.76,
+                feels_like: 65.41,
+                temp_min: 64.76,
+                temp_max: 64.76,
                 pressure: 1004,
                 sea_level: 1004,
                 grnd_level: 986,
-                humidity: 92,
+                humidity: 95,
                 temp_kf: 0
             },
             weather: [
@@ -696,14 +621,14 @@ const moscow_data = {
                 all: 100
             },
             wind: {
-                speed: 1.81,
-                deg: 330,
-                gust: 2.48
+                speed: 4.63,
+                deg: 334,
+                gust: 8.19
             },
             visibility: 10000,
             pop: 1,
-            "rain": {
-                "3h": 0.52
+            rain: {
+                "3h": 2
             },
             sys: {
                 pod: "d"
@@ -713,14 +638,14 @@ const moscow_data = {
         {
             dt: 1750237200,
             main: {
-                temp: 288.03,
-                feels_like: 287.92,
-                temp_min: 288.03,
-                temp_max: 288.03,
+                temp: 61.86,
+                feels_like: 61.79,
+                temp_min: 61.86,
+                temp_max: 61.86,
                 pressure: 1005,
                 sea_level: 1005,
                 grnd_level: 986,
-                humidity: 90,
+                humidity: 86,
                 temp_kf: 0
             },
             weather: [
@@ -735,14 +660,14 @@ const moscow_data = {
                 all: 100
             },
             wind: {
-                speed: 2.12,
-                deg: 330,
-                gust: 2.78
+                speed: 2.66,
+                deg: 324,
+                gust: 4.9
             },
             visibility: 10000,
-            pop: 0.52,
-            "rain": {
-                "3h": 0.27
+            pop: 1,
+            rain: {
+                "3h": 1.51
             },
             sys: {
                 pod: "d"
@@ -752,13 +677,52 @@ const moscow_data = {
         {
             dt: 1750248000,
             main: {
-                temp: 291.12,
-                feels_like: 290.98,
-                temp_min: 291.12,
-                temp_max: 291.12,
+                temp: 63.5,
+                feels_like: 63.41,
+                temp_min: 63.5,
+                temp_max: 63.5,
                 pressure: 1004,
                 sea_level: 1004,
                 grnd_level: 986,
+                humidity: 82,
+                temp_kf: 0
+            },
+            weather: [
+                {
+                    id: 500,
+                    main: "Rain",
+                    description: "light rain",
+                    icon: "10d"
+                }
+            ],
+            clouds: {
+                all: 100
+            },
+            wind: {
+                speed: 4.68,
+                deg: 302,
+                gust: 7.05
+            },
+            visibility: 10000,
+            pop: 1,
+            rain: {
+                "3h": 1.75
+            },
+            sys: {
+                pod: "d"
+            },
+            dt_txt: "2025-06-18 12:00:00"
+        },
+        {
+            dt: 1750258800,
+            main: {
+                temp: 64.69,
+                feels_like: 64.47,
+                temp_min: 64.69,
+                temp_max: 64.69,
+                pressure: 1003,
+                sea_level: 1003,
+                grnd_level: 985,
                 humidity: 77,
                 temp_kf: 0
             },
@@ -774,53 +738,14 @@ const moscow_data = {
                 all: 100
             },
             wind: {
-                speed: 1.96,
-                deg: 341,
-                gust: 2.8
+                speed: 7.38,
+                deg: 293,
+                gust: 10.31
             },
             visibility: 10000,
-            pop: 0.29,
-            "rain": {
-                "3h": 0.13
-            },
-            sys: {
-                pod: "d"
-            },
-            dt_txt: "2025-06-18 12:00:00"
-        },
-        {
-            dt: 1750258800,
-            main: {
-                temp: 292.13,
-                feels_like: 291.86,
-                temp_min: 292.13,
-                temp_max: 292.13,
-                pressure: 1004,
-                sea_level: 1004,
-                grnd_level: 985,
-                humidity: 68,
-                temp_kf: 0
-            },
-            weather: [
-                {
-                    id: 500,
-                    main: "Rain",
-                    description: "light rain",
-                    icon: "10d"
-                }
-            ],
-            clouds: {
-                all: 77
-            },
-            wind: {
-                speed: 2.77,
-                deg: 330,
-                gust: 3.64
-            },
-            visibility: 10000,
-            pop: 0.29,
-            "rain": {
-                "3h": 0.26
+            pop: 0.72,
+            rain: {
+                "3h": 0.71
             },
             sys: {
                 pod: "d"
@@ -830,14 +755,89 @@ const moscow_data = {
         {
             dt: 1750269600,
             main: {
-                temp: 289.34,
-                feels_like: 289.26,
-                temp_min: 289.34,
-                temp_max: 289.34,
+                temp: 60.67,
+                feels_like: 60.58,
+                temp_min: 60.67,
+                temp_max: 60.67,
                 pressure: 1003,
                 sea_level: 1003,
-                grnd_level: 985,
-                humidity: 86,
+                grnd_level: 984,
+                humidity: 88,
+                temp_kf: 0
+            },
+            weather: [
+                {
+                    id: 804,
+                    main: "Clouds",
+                    description: "overcast clouds",
+                    icon: "04d"
+                }
+            ],
+            clouds: {
+                all: 100
+            },
+            wind: {
+                speed: 5.57,
+                deg: 298,
+                gust: 12.93
+            },
+            visibility: 10000,
+            pop: 0.54,
+            sys: {
+                pod: "d"
+            },
+            dt_txt: "2025-06-18 18:00:00"
+        },
+        {
+            dt: 1750280400,
+            main: {
+                temp: 57.42,
+                feels_like: 57.24,
+                temp_min: 57.42,
+                temp_max: 57.42,
+                pressure: 1001,
+                sea_level: 1001,
+                grnd_level: 983,
+                humidity: 93,
+                temp_kf: 0
+            },
+            weather: [
+                {
+                    id: 500,
+                    main: "Rain",
+                    description: "light rain",
+                    icon: "10n"
+                }
+            ],
+            clouds: {
+                all: 52
+            },
+            wind: {
+                speed: 4.99,
+                deg: 276,
+                gust: 9.89
+            },
+            visibility: 10000,
+            pop: 0.38,
+            rain: {
+                "3h": 0.16
+            },
+            sys: {
+                pod: "n"
+            },
+            dt_txt: "2025-06-18 21:00:00"
+        },
+        {
+            dt: 1750291200,
+            main: {
+                temp: 55.22,
+                feels_like: 54.68,
+                temp_min: 55.22,
+                temp_max: 55.22,
+                pressure: 1000,
+                sea_level: 1000,
+                grnd_level: 981,
+                humidity: 90,
                 temp_kf: 0
             },
             weather: [
@@ -845,23 +845,23 @@ const moscow_data = {
                     id: 802,
                     main: "Clouds",
                     description: "scattered clouds",
-                    icon: "03d"
+                    icon: "03n"
                 }
             ],
             clouds: {
-                all: 47
+                all: 39
             },
             wind: {
-                speed: 1.94,
-                deg: 295,
-                gust: 3.13
+                speed: 4.97,
+                deg: 262,
+                gust: 10.56
             },
             visibility: 10000,
-            pop: 0.06,
+            pop: 0.09,
             sys: {
-                pod: "d"
+                pod: "n"
             },
-            dt_txt: "2025-06-18 18:00:00"
+            dt_txt: "2025-06-19 00:00:00"
         }
     ],
     "city": {
@@ -883,17 +883,20 @@ beforeEach(() => {
     global.fetch = jest.fn((url) => {
         if (url.includes('q=London')) {
             return Promise.resolve({
+                ok: true,
                 json: () => Promise.resolve(london_data),
             });
         }
 
-        if (url.includes('q=moscow') && url.includes('cnt=12')) {
+        if (url.includes('q=moscow') && url.includes('cnt=12') && url.includes('units=imperial')) {
             return Promise.resolve({
+                ok: true,
                 json: () => Promise.resolve(moscow_data),
             });
         }
 
         return Promise.resolve({
+            ok: false,
             json: () => Promise.resolve({ message: 'No data for this location' }),
         });
     }) as jest.Mock
@@ -921,16 +924,16 @@ describe('ChartPage', () => {
             expect(screen.getByText('sea_level')).toBeInTheDocument();
             expect(screen.getByText('ground_level')).toBeInTheDocument();
 
-            expect(screen.getByText('2025-06-16 15:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-16 18:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-16 21:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-17 00:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-17 03:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-17 06:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-17 09:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-17 12:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-17 15:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-17 18:00:00')).toBeInTheDocument()
+            expect(screen.getAllByText('2025-06-16 15:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-16 18:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-16 21:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-17 00:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-17 03:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-17 06:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-17 09:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-17 12:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-17 15:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-17 18:00:00')).toHaveLength(3)
         })
 
         const bars = container.querySelectorAll('.recharts-layer.recharts-bar-rectangle')
@@ -946,7 +949,7 @@ describe('ChartPage', () => {
         })
         await waitFor(() => {
             expect(container.querySelectorAll('.recharts-tooltip-wrapper')[0]).toHaveStyle('visibility: visible')
-            expect(container.querySelectorAll('.recharts-tooltip-item-list')[0]?.textContent).toContain('temperature : 297.16')
+            expect(container.querySelectorAll('.recharts-tooltip-item-list')[0]?.textContent).toContain('temperature : 297.16°K')
         })
 
         // humidity chart hover
@@ -956,7 +959,7 @@ describe('ChartPage', () => {
         })
         await waitFor(() => {
             expect(container.querySelectorAll('.recharts-tooltip-wrapper')[1]).toHaveStyle('visibility: visible')
-            expect(container.querySelectorAll('.recharts-tooltip-item-list')[1]?.textContent).toContain('value : 47')
+            expect(container.querySelectorAll('.recharts-tooltip-item-list')[1]?.textContent).toContain('value : 47%')
         })
 
         // pressure chart hover
@@ -966,12 +969,12 @@ describe('ChartPage', () => {
         })
         await waitFor(() => {
             expect(container.querySelectorAll('.recharts-tooltip-wrapper')[2]).toHaveStyle('visibility: visible')
-            expect(container.querySelectorAll('.recharts-tooltip-item-list')[2]?.textContent).toContain('sea_level : 1027')
-            expect(container.querySelectorAll('.recharts-tooltip-item-list')[2]?.textContent).toContain('ground_level : 1022')
+            expect(container.querySelectorAll('.recharts-tooltip-item-list')[2]?.textContent).toContain('sea_level : 1027 hPa')
+            expect(container.querySelectorAll('.recharts-tooltip-item-list')[2]?.textContent).toContain('ground_level : 1022 hPa')
         })
     })
 
-    it('renders with moscow data', async () => {
+    it('renders with moscow data, count 12 and unit imperial', async () => {
         const { container } = render(<ChartPage />)
 
         const h1 = screen.getByRole('heading', { level: 1 })
@@ -983,6 +986,9 @@ describe('ChartPage', () => {
 
         const cnt = screen.getByLabelText('Count:')
         fireEvent.input(cnt, { target: { value: '12' } })
+
+        const unit_input = screen.getByLabelText('Unit:');
+        fireEvent.change(unit_input, { target: { value: 'imperial' } });
 
         const submit_button = screen.getByText('Filter results')
         fireEvent.click(submit_button)
@@ -998,16 +1004,18 @@ describe('ChartPage', () => {
             expect(screen.getByText('sea_level')).toBeInTheDocument();
             expect(screen.getByText('ground_level')).toBeInTheDocument();
 
-            expect(screen.getByText('2025-06-17 09:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-17 12:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-17 15:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-17 18:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-17 21:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-18 00:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-18 03:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-18 06:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-18 09:00:00')).toBeInTheDocument()
-            expect(screen.getByText('2025-06-18 12:00:00')).toBeInTheDocument()
+            expect(screen.getAllByText('2025-06-17 15:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-17 18:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-17 21:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-18 00:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-18 03:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-18 06:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-18 09:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-18 12:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-18 15:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-18 18:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-18 21:00:00')).toHaveLength(3)
+            expect(screen.getAllByText('2025-06-19 00:00:00')).toHaveLength(3)
         })
 
         const bars = container.querySelectorAll('.recharts-layer.recharts-bar-rectangle')
@@ -1023,7 +1031,7 @@ describe('ChartPage', () => {
         })
         await waitFor(() => {
             expect(container.querySelectorAll('.recharts-tooltip-wrapper')[0]).toHaveStyle('visibility: visible')
-            expect(container.querySelectorAll('.recharts-tooltip-item-list')[0]?.textContent).toContain('temperature : 297.48')
+            expect(container.querySelectorAll('.recharts-tooltip-item-list')[0]?.textContent).toContain('temperature : 70.41°F')
         })
 
         // humidity chart hover
@@ -1033,7 +1041,7 @@ describe('ChartPage', () => {
         })
         await waitFor(() => {
             expect(container.querySelectorAll('.recharts-tooltip-wrapper')[1]).toHaveStyle('visibility: visible')
-            expect(container.querySelectorAll('.recharts-tooltip-item-list')[1]?.textContent).toContain('value : 54')
+            expect(container.querySelectorAll('.recharts-tooltip-item-list')[1]?.textContent).toContain('value : 69%')
         })
 
         // pressure chart hover
@@ -1043,8 +1051,8 @@ describe('ChartPage', () => {
         })
         await waitFor(() => {
             expect(container.querySelectorAll('.recharts-tooltip-wrapper')[2]).toHaveStyle('visibility: visible')
-            expect(container.querySelectorAll('.recharts-tooltip-item-list')[2]?.textContent).toContain('sea_level : 1008')
-            expect(container.querySelectorAll('.recharts-tooltip-item-list')[2]?.textContent).toContain('ground_level : 989')
+            expect(container.querySelectorAll('.recharts-tooltip-item-list')[2]?.textContent).toContain('sea_level : 1006 hPa')
+            expect(container.querySelectorAll('.recharts-tooltip-item-list')[2]?.textContent).toContain('ground_level : 987 hPa')
         })
     })
 })
